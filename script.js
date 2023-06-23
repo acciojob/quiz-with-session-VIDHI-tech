@@ -55,6 +55,7 @@ function saveScore(score) {
 }
 
 // Display the quiz questions and choices
+// Display the quiz questions and choices
 function renderQuestions() {
   const questionsElement = document.getElementById('questions');
   const progress = retrieveProgress();
@@ -79,9 +80,13 @@ function renderQuestions() {
       choiceElement.addEventListener('change', saveProgress);
 
       const choiceText = document.createTextNode(choice);
-      questionElement.appendChild(choiceElement);
-      questionElement.appendChild(choiceText);
+      const choiceLabel = document.createElement('label');
+      choiceLabel.appendChild(choiceElement);
+      choiceLabel.appendChild(choiceText);
+
+      questionElement.appendChild(choiceLabel);
     }
+
     questionsElement.appendChild(questionElement);
   }
 }
