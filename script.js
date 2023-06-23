@@ -1,4 +1,59 @@
-//your JS code here.
+// your JS code here.
+// Check if session storage is supported
+function isSessionStorageSupported() {
+  try {
+    return window.sessionStorage !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+// Check if local storage is supported
+function isLocalStorageSupported() {
+  try {
+    return window.localStorage !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+// Retrieve progress from session storage
+function retrieveProgress() {
+  if (isSessionStorageSupported()) {
+    const progress = sessionStorage.getItem('progress');
+    if (progress) {
+      return JSON.parse(progress);
+    }
+  }
+  return [];
+}
+
+// Save progress in session storage
+function saveProgress() {
+  if (isSessionStorageSupported()) {
+    const choices = document.querySelectorAll('input[type="radio"]:checked');
+    const progress = Array.from(choices).map((choice) => choice.value);
+    sessionStorage.setItem('progress', JSON.stringify(progress));
+  }
+}
+
+// Retrieve score from local storage
+function retrieveScore() {
+  if (isLocalStorageSupported()) {
+    const score = localStorage.getItem('score');
+    if (score) {
+      return parseInt(score);
+    }
+  }
+  return 0;
+}
+
+// Save score in local storage
+function saveScore(score) {
+  if (isLocalStorageSupported()) {
+    localStorage.setItem('score', score.toString());
+  }
+}
 
 // Do not change code below this line
 // This code will just display the questions to the screen
